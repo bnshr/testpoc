@@ -69,12 +69,23 @@ func calcCubes(number int, op chan int) {
 	op <- sum
 }
 
+func sendData(sendch chan<- int) {
+	sendch <- 10
+}
+
+func producer(chnl chan int) {
+	for i := 0; i < 10; i++ {
+		chnl <- i
+	}
+	close(chnl)
+}
+
 func main() {
 	/*done := make(chan bool)
 	fmt.Println("main going to call hello")
 	go hello(done)
 	<-done
-	fmt.Println("main function")*/
+	fmt.Println("main function")
 
 	number := 999
 	sqr := make(chan int)
@@ -85,5 +96,16 @@ func main() {
 
 	squares, cubes := <-sqr, <-cube
 
-	fmt.Println("Final output", squares, cubes)
+	fmt.Println("Final output", squares, cubes)*/
+
+	ch := make(chan int)
+	go producer(ch)
+
+	for {
+		v, ok := <-ch
+		if !ok {
+			break
+		}
+		fmt.Println("Received ", v, ok)
+	}
 }
