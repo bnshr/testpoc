@@ -14,7 +14,7 @@ func increment(wg *sync.WaitGroup, m *sync.Mutex) {
 	wg.Done()
 }
 
-func main() {
+func main_2() {
 	var w sync.WaitGroup
 	var m sync.Mutex
 
