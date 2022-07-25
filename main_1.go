@@ -125,7 +125,7 @@ func result(done chan bool) {
 	done <- true
 }
 
-func main() {
+func main_1() {
 	start := time.Now()
 	jobsCount := 100
 
